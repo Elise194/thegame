@@ -3,12 +3,12 @@ thegame
 
 The Game
 
-Authors:
+## **Credits:**
 
-Ilya Medvedev - CEO & Developer
+**[Ilya Medvedev](https://github.com/iam-medvedev)** - Developer
 
-Pavel Yudin - Developer
+**[Pavel Yudin](https://github.com/PashkaYudin)** - Developer
 
-Artem Mazaev - Developer & Bug Finder & Errors Manager & Vichurno Krasiv
+**[Artem Mazaev](https://github.com/artemmazaev)** - Developer & Bug Finder & Errors Manager & *Vichurno Krasiv*
 
-Elizaveta Shurupa - Tester & Report Manager
+**[Elizaveta Shurupa](#)** - Tester & Report Manager
