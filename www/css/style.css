@@ -1,1 +1,129 @@
-..!.-
+@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
+@import url(http://maxcdn.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css);
+
+/* Главная страница
+=======================================*/
+
+.index {
+	background: #22a7f0;
+	color: #fff;;
+}
+
+.index .logo {
+	width: 429px;
+	height: 73px;
+	background: url(../img/logo-full.png) center center;
+}
+
+.index .wrapper {
+	width: 430px;
+	height: 200px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -215px;
+	margin-top: -100px;
+}
+
+.index .menu {
+	padding-top: 30px;
+	text-align: center;
+}
+
+
+
+
+/* Меню в игре
+=======================================*/
+
+.main {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.main .label {
+	font-size: 30px !important;
+	margin-left: 20px;
+	vertical-align: super
+}
+
+.main .logo-small {
+	background: url(../img/logo-small.png) center center;
+	width: 65px;
+	height: 62px;
+	display: inline-block;
+	margin-left: 20px;
+	vertical-align: sub;
+}
+
+
+
+
+/* Игровое поле
+=======================================*/
+
+.game #lunks {
+	text-align: center;
+	width: 900px;
+	
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -450px;
+	margin-top: -100px;
+}
+
+.game .col-xs-4 {
+	margin-bottom: 70px;
+}
+
+.game .lunka {
+	width: 171px;
+	height: 63px;
+	display: inline-block;
+	background: url(../img/lunka.png) center center;
+}
+
+.game .lunka:after {
+	content: "";
+	width: 171px;
+	height: 133px;
+	background: url(../img/lunka-over2.png) center top;
+	position: absolute;
+	top: 0;
+	/* margin-left: -140px; */
+	margin-left: -85px;
+}
+
+.game .rabbit {
+	width: 109px;
+	height: 124px;
+	background: url(../img/rabbit-cute.png) center center;
+	display: block;
+	position: relative;
+	margin-left: 30px;
+	
+	-webkit-transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-ms-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
+}
+
+.game .rabbit-hide {
+	top: 50px;
+	height: 70px;
+}
+
+.game .rabbit-show {
+	top: -64px;
+	height: 124px;
+}
+
+
+/* Темы
+=======================================*/
+
+.theme-desert {
+	background: #F5AB35;
+}
