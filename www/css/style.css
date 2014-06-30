@@ -98,7 +98,7 @@
 .game .rabbit {
 	width: 109px;
 	height: 124px;
-	background: url(../img/rabbit-cute.png) center center;
+	background: url(../img/rabbit-cute.png) center top;
 	display: block;
 	position: relative;
 	margin-left: 30px;
