@@ -42,13 +42,13 @@ $(document).ready(function() {
 	
 	function show_rabbits() {
 		var showtime = 1000;
-		var hidetime = 500;
+		var hidetime = 800;
 		show = setInterval(function() {
 			var number = 1 + Math.floor(Math.random() * 9);
 			$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
-				setInterval(function() {
-					$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
-				}, hidetime);
+			setTimeout(function() {
+				$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
+			}, hidetime);
 		}, showtime);
 	}
 	
