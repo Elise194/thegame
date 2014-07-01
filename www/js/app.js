@@ -58,6 +58,18 @@ $(document).ready(function() {
 		clearInterval(show);
 		alert("Конец");
 	}
+
+	
+$(".rabbit").click(function(){
+        $(this).removeClass(".rabbit-show");
+		localStorage["coins"]=localStorage["coins"]+5;        
+		localStorage["time"]=localStorage["time"]+2;
+		$(this).addClass("rabbit-dead");
+		setTimeout(function() {
+				$(this).removeClass("rabbit-show");
+			},600);
+	return false;
+});
 	
 	function init() {
 		config();
@@ -76,14 +88,3 @@ $(document).ready(function() {
 	init();
 });
 
-
-$(".rabbit").click(function(){
-        $(this).removeClass(".rabbit-show");
-	localStorage["coins"]=localStorage["coins"]+5;        
-	localStorage["time"]=localStorage["time"]+2;
-	$(this).addClass("rabbit-dead");
-	setTimeout(function() {
-				$(this).removeClass("rabbit-show");
-			},600);
-	return false;
-});
