@@ -64,7 +64,7 @@ $(document).ready(function() {
 		var self = $(this).find(".rabbit");
 	
 		if(self.hasClass("rabbit-show")) {
-			localStorage["coins"] = parseInt(localStorage["coins"]) + 5;
+			localStorage["coins"] = parseInt(localStorage["coins"]) + paresInt(self.data("money"));
 			localStorage["time"] = parseInt(localStorage["time"]) + 2;
 			self.addClass("rabbit-dead");
 			self.addClass("rabbit-show");
