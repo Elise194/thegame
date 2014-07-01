@@ -48,6 +48,12 @@ $(document).ready(function() {
 			$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
 			setTimeout(function() {
 				$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
+				
+				setTimeout(function(){
+					var randSkin = 1 + Math.floor(Math.random() * 4);
+					$('#lunka-'+number+' .rabbit').attr("class", "rabbit rabbit-"+randSkin);
+					$('#lunka-'+number+' .rabbit').data("money", randSkin*5);
+				}, 600)
 			}, hidetime);
 		}, showtime);
 	}
