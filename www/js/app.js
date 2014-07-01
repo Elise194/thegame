@@ -10,6 +10,10 @@ $(document).ready(function() {
 		if(typeof localStorage["gun"] == 'undefined') {
 			 localStorage["gun"] = 0;
 		}
+		
+		if(typeof localStorage["theme"] == 'undefined') {
+			 localStorage["theme"] = 0;
+		}
 	}
 	
 	function timer() {
@@ -58,10 +62,11 @@ $(document).ready(function() {
 	function init() {
 		config();
 		
+		$("body").addClass("gun-"+localStorage["gun"]+" theme-"+localStorage["theme"]);
+		
+		
 		localStorage["time"] = 27;
-		
 		timer();
-		
 		$(".coins").text(localStorage["coins"]);
 		
 		show_rabbits();
