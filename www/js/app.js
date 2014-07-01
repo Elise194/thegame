@@ -60,16 +60,24 @@ $(document).ready(function() {
 	}
 
 	
-$(".rabbit").click(function(){
-        $(this).removeClass(".rabbit-show");
-		localStorage["coins"]=parseInt(localStorage["coins"])+5;        
-		localStorage["time"]=parseInt(localStorage["time"])+2;
-		$(this).addClass("rabbit-dead");
-		setTimeout(function() {
-				$(this).removeClass("rabbit-show");
-			},600);
-	return false;
-});
+	$(".lunka").click(function(){
+		var self = $(this).find(".rabbit");
+	
+		if(self.hasClass("rabbit-show")) {
+			localStorage["coins"] = parseInt(localStorage["coins"]) + 5;
+			localStorage["time"] = parseInt(localStorage["time"]) + 2;
+			self.addClass("rabbit-dead");
+			self.addClass("rabbit-show");
+			
+			setTimeout(function() {
+				self.removeClass("rabbit-dead");
+				self.removeClass("rabbit-show");
+			}, 600);
+			
+			$(".coins").text(localStorage["coins"]);
+		}
+		return false;
+	});
 	
 	function init() {
 		config();
