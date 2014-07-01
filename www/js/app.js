@@ -36,6 +36,19 @@ $(document).ready(function() {
 		}, 1000);
 	}
 	
+	function show_rabbits() {
+		var showtime = 1000;
+		var hidetime = 500;
+		show = setInterval(function() {
+			var number = 1 + Math.floor(Math.random() * 9);
+			$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
+				setInterval(function() {
+					$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
+				}, hidetime);
+		}, showtime);
+	}
+	
+	
 	function stop() {
 		clearInterval(timer);
 		clearInterval(show);
@@ -51,16 +64,7 @@ $(document).ready(function() {
 		
 		$(".coins").text(localStorage["coins"]);
 		
-		// сюда запилить функцию выпрыгивания кроликов
-		var showtime = 1000;
-		var hidetime = 500;
-		show = setInterval(function() {
-			var number = 1 + Math.floor(Math.random() * 9);
-			$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
-				setInterval(function() {
-					$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
-				}, hidetime);
-		}, showtime);
+		show_rabbits();
 		
 	}
 	
