@@ -82,7 +82,7 @@ $(document).ready(function() {
 	function init() {
 		config();
 		
-		$("body").addClass("gun-"+localStorage["gun"]+" theme-"+localStorage["theme"]);
+		$("body.game").addClass("gun-"+localStorage["gun"]+" theme-"+localStorage["theme"]);
 		
 		
 		localStorage["time"] = 27;
