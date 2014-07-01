@@ -62,8 +62,8 @@ $(document).ready(function() {
 	
 $(".rabbit").click(function(){
         $(this).removeClass(".rabbit-show");
-		localStorage["coins"]=localStorage["coins"]+5;        
-		localStorage["time"]=localStorage["time"]+2;
+		localStorage["coins"]=parseInt(localStorage["coins"])+5;        
+		localStorage["time"]=parseInt(localStorage["time"])+2;
 		$(this).addClass("rabbit-dead");
 		setTimeout(function() {
 				$(this).removeClass("rabbit-show");
