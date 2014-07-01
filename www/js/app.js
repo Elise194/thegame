@@ -38,24 +38,39 @@ $(document).ready(function() {
 	
 	function stop() {
 		clearInterval(timer);
+		clearInterval(show);
 		alert("Конец");
 	}
 	
 	function init() {
 		config();
 		
-		localStorage["time"] = 11;
+		localStorage["time"] = 27;
 		
 		timer();
 		
 		$(".coins").text(localStorage["coins"]);
 		
 		// сюда запилить функцию выпрыгивания кроликов
+		var showtime = 1000;
+		var hidetime = 500;
+		show = setInterval(function() {
+			var number = 1 + Math.floor(Math.random() * 9);
+			$('#lunka-'+number+'').addClass("rabbit-show");
+				setInterval(function() {
+					$('#lunka-'+number+'').removeClass("rabbit-show");
+				}, hidetime);
+		}, showtime);
+		
 	}
 	
 	init();
-		
+	/*$('#rab-'+number+'').click(function(){
+			localStorage["time"] = localStorage["time"]+5;
+			localStorage["coins"] = localStorage["coins"]+5;
+		});*/
 	// demo
+	/*
 	var i = 0;
 	$(".test-rabbit").click(function(){
 		if(i == 0) {
@@ -71,5 +86,5 @@ $(document).ready(function() {
 		return false;
 	});
 	//
-	
+	*/
 });
