@@ -111,12 +111,12 @@
 }
 
 .game .rabbit {
-	width: 109px;
-	height: 124px;
-	background: url(../img/rabbit-cute.png) center top;
+	width: 128px;
+	height: 128px;
+	background: url(../img/rabbits/rabbit-cute.png) center top;
 	display: block;
 	position: relative;
-	margin-left: 30px;
+	margin-left: 25px;
 	
 	top: 48px;
 	height: 70px;
@@ -126,6 +126,10 @@
 	-ms-transition: all .5s ease-in-out;
 	-o-transition: all .5s ease-in-out;
 	transition: all .5s ease-in-out;
+}
+
+.game .rabbit-dead {
+	background: url(../img/rabbit-cute.png) center top !important;	
 }
 
 .game .rabbit-show {
