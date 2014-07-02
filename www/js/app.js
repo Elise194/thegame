@@ -85,6 +85,38 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$(".openShop").click(function(){
+		$("#shop").slideToggle(1000);
+	});
+	
+	function shop() {
+		var guns = {
+			0 : {
+				"id" : 0,
+				"name" : "Морковка",
+				"coins" : 0,
+				"img" : "0-carrot.png"
+			},
+			1 : {
+				"id" : 1,
+				"name" : "Топор",
+				"coins" : 500,
+				"img" : "1-axe.png"
+			}
+		};
+		
+		
+		$.each(guns, function(i, val) {
+			var id = val["id"];
+			var coins = val["coins"];
+			var name = val["name"];
+			var img = val["img"];
+			var status = 0;
+			
+	    	$(".shopjs .row").append('<div class="col-xs-4"><div class="buy-gun" data-id="'+id+'" data-coins="'+coins+'" data-status="'+status+'" style="cursor: url(img/guns/'+img+'), auto;"><div class="img"><img src="img/guns/'+img+'" alt=""></div><p class="gun-info"><strong>'+name+'</strong><br><i class="fa fa-money">'+coins+'</i></p></div></div>');
+	    });
+	}
+	
 	function init() {
 		config();
 		
@@ -99,6 +131,8 @@ $(document).ready(function() {
 		
 	}
 	
-	init();
+	if($("body").hasClass("game")) {
+		init();	
+	}
 });
 

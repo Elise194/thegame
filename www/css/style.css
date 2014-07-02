@@ -9,6 +9,19 @@
     user-select: none;
 }
 
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
 
 /* Главная страница
 =======================================*/
@@ -153,6 +166,79 @@
 }
 
 
+
+/* Магазин
+=======================================*/
+
+#shop {
+	display: none;
+}
+
+.shop {
+	margin-top: 40px;
+	width: 100%;
+	height: 110px;
+	background: #158cba;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	border-color: #127ba3;
+	border-width: 0 1px 8px 1px;
+}
+
+#shop-slider {
+	height: 102px;
+}
+
+.shop .carousel-control {
+	background: none !important;
+	padding-top: 30px;
+}
+
+.shop .carousel-control.left {
+	left: -55px;
+}
+
+.shop .carousel-control.right {
+	right: -55px;
+}
+
+.buy-gun {
+	background: rgba(0,0,0,0.2);
+	height: 102px;
+	padding: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.buy-gun .img {
+	display: block;
+	text-align: center;
+	height: 50px;
+	
+	-webkit-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-ms-transition: all .3s ease-in;
+	-o-transition: all .3s ease-in;
+	transition: all .3s ease-in;
+}
+
+.buy-gun:hover .img {
+	-webkit-transform: scale(0.7);
+	-moz-transform: scale(0.7);
+	-ms-transform: scale(0.7);
+	-o-transform: scale(0.7);
+	transform: scale(0.7);
+}
+
+.buy-gun:hover .img img {
+	-webkit-animation: spin 2s infinite linear;
+	-moz-animation: spin 2s infinite linear;
+	-ms-animation: spin 2s infinite linear;
+	-o-animation: spin 2s infinite linear;
+	animation: spin 2s infinite linear;
+}
+
+
 /* Темы
 =======================================*/
 
@@ -170,4 +256,12 @@
 
 .gun-0:active {
 	cursor: url(../img/guns/0-carrot-click.png), auto;
+}
+
+.gun-1 {
+	cursor: url(../img/guns/1-axe.png), auto;
+}
+
+.gun-1:active {
+	cursor: url(../img/guns/1-axe.png), auto;
 }
