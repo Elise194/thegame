@@ -40,23 +40,28 @@ $(document).ready(function() {
 		}, 1000);
 	}
 	
-	function show_rabbits() {
-		var showtime = 1000;
-		var hidetime = 800;
-		show = setInterval(function() {
-			var number = 1 + Math.floor(Math.random() * 9);
-			$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
-			setTimeout(function() {
-				$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
-				
-				setTimeout(function(){
-					var randSkin = 1 + Math.floor(Math.random() * 4);
-					$('#lunka-'+number+' .rabbit').attr("class", "rabbit rabbit-"+randSkin);
-					$('#lunka-'+number+' .rabbit').data("money", randSkin*5);
-				}, 600)
-			}, hidetime);
-		}, showtime);
-	}
+		
+		function show_rabbits() {
+			var showtime = 1000;
+			var hidetime = 800;
+			var number;
+			var prev;
+			show = setInterval(function() {
+				number = 1 + Math.floor(Math.random() * 9);
+				if(number == prev) {
+				number = 1 + Math.floor(Math.random() * 9);
+				prev = number;
+				return number;
+				} else{
+					$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
+					setTimeout(function() {
+					$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
+					}, hidetime);
+				}
+		
+			}, showtime);
+		
+		}
 	
 	
 	function stop() {
