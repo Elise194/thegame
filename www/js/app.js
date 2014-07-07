@@ -189,6 +189,37 @@ $(document).ready(function() {
 		config();
 		shop();
 	}
+	
+		/*///////////////////////////////////////////////////////////*/
+	function mutanto(){
+		setTimeout(function(){
+			$('#mutant').show();
+			setInterval(function(){
+				borders();
+				$('#mutant').animate({"left": "+= 30px"}, 500);
+				$('#mutant').animate({"top": "+= 30px"}, 500);
+			}, 1000);
+		},10000)
+		
+	}
+	function borders()
+	{
+		var x; var y;
+		var Mheight = 700px;
+		var Mwidth = 1500px;
+		var vX; var vY;
+	    if (y - 64 < 0 || y + 64 > Mheight) //эт верхняя граница и нижняя
+	    {
+	        vY = -vY;
+	    }
+	    if (x - 64 < 0 || x + 64 > Mwidth) //эт с боку граница
+	    {
+	        vX = -vX;
+	    }
+	    // приращение координат
+	    x = vX;
+	    y = vY;
+	}
 });
 
 $(document).on("click", ".buy-gun", function() {
@@ -234,4 +265,5 @@ $(document).on("click", ".buy-gun", function() {
 				})
 		*/
 	}
+
 });
