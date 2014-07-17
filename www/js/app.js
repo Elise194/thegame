@@ -1,30 +1,7 @@
-function load(key) {
-  	return JSON.parse(localStorage[key]);
-}
-
-function save(key, obj) {
-	localStorage[key] = JSON.stringify(obj);
-}
-	 
-
 $(document).ready(function() {
 	var timer;
 	
-	var guns = {
-		0 : {
-			id : 0,
-			name : "Морковка",
-			coins : 0,
-			img : "0-carrot.png"
-		},
-		1 : {
-			id : 1,
-			name : "Топор",
-			coins : 500,
-			img : "1-axe.png"
-		}
-	};
-	
+	// конфиг: монеты, выбранное оружие по id (0 - дефолтная морковка)
 	function config() {
 		if(typeof localStorage["coins"] == 'undefined') {
 			 localStorage["coins"] = 0;
@@ -36,14 +13,6 @@ $(document).ready(function() {
 		
 		if(typeof localStorage["theme"] == 'undefined') {
 			 localStorage["theme"] = 0;
-		}
-		
-		if(typeof localStorage["shop"] == 'undefined') {
-			var data = {
-				guns: [0]
-			};
-			
-			save("shop", data);
 		}
 	}
 	
@@ -70,55 +39,37 @@ $(document).ready(function() {
 			localStorage["time"]--;
 		}, 1000);
 	}
-		
+	
 	function show_rabbits() {
 		var showtime = 1000;
-		var hidetime = 900;
-		var number;
-		var prev;
+		var hidetime = 800;
 		show = setInterval(function() {
-			number = 1 + Math.floor(Math.random() * 9);
-			if(number == prev) {
-				number = 1 + Math.floor(Math.random() * 9);
-				prev = number;
-				return number;
-			} else{
-				el = $('#lunka-'+number+' .rabbit');
-				el.data("ready", 1);
-				el.addClass("rabbit-show");
-				setTimeout(function() {
-					el.removeClass("rabbit-show");
-					el.data("ready", 0);
-					
-					setTimeout(function() {
-						var randSkin = 1 + Math.floor(Math.random() * 4);
-						
-						var prefix = "rabbit-skin-";
-						var classes = el.attr("class").split(" ").filter(function(c) {
-						    return c.lastIndexOf(prefix, 0) !== 0;
-						});
-						el.attr("class", classes.join(" "));
-						
-						el.addClass("rabbit-skin-"+randSkin);
-						el.data("money", randSkin*5);
-					}, 800);
-
-				}, hidetime);
-			}
-	
+			var number = 1 + Math.floor(Math.random() * 9);
+			$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
+			setTimeout(function() {
+				$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
+				
+				setTimeout(function(){
+					var randSkin = 1 + Math.floor(Math.random() * 4);
+					$('#lunka-'+number+' .rabbit').attr("class", "rabbit rabbit-"+randSkin);
+					$('#lunka-'+number+' .rabbit').data("money", randSkin*5);
+				}, 600)
+			}, hidetime);
 		}, showtime);
 	}
+	
 	
 	function stop() {
 		clearInterval(timer);
 		clearInterval(show);
 		alert("Конец");
 	}
+
 	
 	$(".lunka").click(function(){
 		var self = $(this).find(".rabbit");
 	
-		if(self.data("ready") == 1) {
+		if(self.hasClass("rabbit-show")) {
 			localStorage["coins"] = parseInt(localStorage["coins"]) + parseInt(self.data("money"));
 			localStorage["time"] = parseInt(localStorage["time"]) + 2;
 			self.addClass("rabbit-dead");
@@ -130,7 +81,6 @@ $(document).ready(function() {
 			}, 600);
 			
 			$(".coins").text(localStorage["coins"]);
-			el.data("ready", 0);
 		}
 		return false;
 	});
@@ -140,30 +90,30 @@ $(document).ready(function() {
 	});
 	
 	function shop() {
-		var data = load("shop");
-			
+		var guns = {
+			0 : {
+				"id" : 0,
+				"name" : "Морковка",
+				"coins" : 0,
+				"img" : "0-carrot.png"
+			},
+			1 : {
+				"id" : 1,
+				"name" : "Топор",
+				"coins" : 500,
+				"img" : "1-axe.png"
+			}
+		};
+		
+		
 		$.each(guns, function(i, val) {
 			var id = val["id"];
 			var coins = val["coins"];
 			var name = val["name"];
 			var img = val["img"];
-			
 			var status = 0;
-			if (data.guns.indexOf(id) >= 0) {
-				status = 1;
-			}
 			
-			var icon = '<i class="fa fa-money"></i>';
-			if(status == 1) {
-				var checked = "fa-check-circle-o";
-				if(parseInt(localStorage["gun"]) == parseInt(id)) {
-					checked = "fa-check-circle";
-				}
-				icon = '<i class="fa '+checked+'"></i>';
-				coins = "";
-			}
-			
-	    	$(".shopjs .row").append('<div class="col-xs-4"><div class="buy-gun" data-id="'+id+'" data-coins="'+coins+'" data-status="'+status+'" style="cursor: url(img/guns/'+img+'), auto;"><div class="img"><img src="img/guns/'+img+'" alt=""></div><p class="gun-info"><strong class="gun-title">'+name+'</strong><br>'+icon+' '+coins+'</p></div></div>');
+	    	$(".shopjs .row").append('<div class="col-xs-4"><div class="buy-gun" data-id="'+id+'" data-coins="'+coins+'" data-status="'+status+'" style="cursor: url(img/guns/'+img+'), auto;"><div class="img"><img src="img/guns/'+img+'" alt=""></div><p class="gun-info"><strong>'+name+'</strong><br><i class="fa fa-money">'+coins+'</i></p></div></div>');
 	    });
 	}
 	
@@ -184,86 +134,5 @@ $(document).ready(function() {
 	if($("body").hasClass("game")) {
 		init();	
 	}
-	
-	if($("body").hasClass("index")) {
-		config();
-		shop();
-	}
-	
-		/*///////////////////////////////////////////////////////////*/
-	function mutanto(){
-		setTimeout(function(){
-			$('#mutant').show();
-			setInterval(function(){
-				borders();
-				$('#mutant').animate({"left": "+= 30px"}, 500);
-				$('#mutant').animate({"top": "+= 30px"}, 500);
-			}, 1000);
-		},10000)
-		
-	}
-	function borders()
-	{
-		var x; var y;
-		var Mheight = 700px;
-		var Mwidth = 1500px;
-		var vX; var vY;
-	    if (y - 64 < 0 || y + 64 > Mheight) //эт верхняя граница и нижняя
-	    {
-	        vY = -vY;
-	    }
-	    if (x - 64 < 0 || x + 64 > Mwidth) //эт с боку граница
-	    {
-	        vX = -vX;
-	    }
-	    // приращение координат
-	    x = vX;
-	    y = vY;
-	}
 });
 
-$(document).on("click", ".buy-gun", function() {
-	var cost = $(this).data("coins");
-	var status = $(this).data("status");
-	var id = $(this).data("id");
-	var title = $(this).find(".gun-title").text();
-	
-	if(status == 0) {
-		if(parseInt(localStorage["coins"]) >= parseInt(cost)) {
-			var data = load("shop");
-			data.guns.push(id);
-			save("shop", data);
-			
-			localStorage["gun"] = id;
-			
-			alert("Вы успешно приобрели: " + title);
-			
-			localStorage["coins"] = parseInt(localStorage["coins"]) - parseInt(cost);
-			
-			location.reload();
-		} else {
-			alert("У вас недостаточно средств для покупки!");
-		}
-	} else {
-		localStorage["gun"] = id;
-		alert("Вы выбрали оружие: " + title);
-		
-		location.reload();
-		/*
-		$.ajax({
-					data: "",
-					url: "index.html",
-					success: function(data) {
-						var shop = $(data).filter("#shop").html();
-						$("#shop").addClass("loading");
-						
-						setTimeout(function(){
-							$("#shop").html(shop);
-							$("#shop").removeClass("loading");
-						}, 1500);
-					}
-				})
-		*/
-	}
-
-});
