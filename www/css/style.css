@@ -140,30 +140,24 @@
 	transition: all .5s ease-in-out;
 }
 
-.game .rabbit-skin-1 {
+.game .rabbit-1 {
 	background: url(../img/rabbits/rabbit-cute.png) center top;
 }
 
-.game .rabbit-skin-2 {
+.game .rabbit-2 {
 	background: url(../img/rabbits/rabbit-crazy.png) center top;
 }
 
-.game .rabbit-skin-3 {
+.game .rabbit-3 {
 	background: url(../img/rabbits/rabbit-green.png) center top;
 }
 
-.game .rabbit-skin-4 {
+.game .rabbit-4 {
 	background: url(../img/rabbits/rabbit-emo.png) center top;
 }
 
 .game .rabbit-dead {
-	/* background: url(../img/rabbits/rabbit-dead.png) center top !important; */
-	
-	-webkit-transform: scale(0.5);
-	-moz-transform: scale(0.5);
-	-ms-transform: scale(0.5);
-	-o-transform: scale(0.5);
-	transform: scale(0.5);
+	background: url(../img/rabbits/rabbit-dead.png) center top !important;
 }
 
 .game .rabbit-show {
@@ -178,28 +172,6 @@
 
 #shop {
 	display: none;
-}
-
-#shop.loading {
-	opacity: 0.5;
-	
-	-webkit-transition: all .5s ease-in-out;
-	-moz-transition: all .5s ease-in-out;
-	-ms-transition: all .5s ease-in-out;
-	-o-transition: all .5s ease-in-out;
-	transition: all .5s ease-in-out;
-}
-
-#shop.loading:before {
-	content: "Загрузка...";
-	text-align: center;
-	padding-top: 40px;
-	color: #eee;
-	width: 100%;
-	height: 110px;
-	position: absolute;
-	background: rgba(255,255,255,0.5);
-	border-radius: 3px;
 }
 
 .shop {
@@ -291,5 +263,9 @@
 }
 
 .gun-1:active {
+<<<<<<< HEAD
 	cursor: url(../img/guns/1-axe-click.png), auto;
+=======
+	cursor: url(../img/guns/1-axe.png), auto;
+>>>>>>> FETCH_HEAD
 }
