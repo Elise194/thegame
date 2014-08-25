@@ -1,7 +1,30 @@
+function load(key) {
+  	return JSON.parse(localStorage[key]);
+}
+
+function save(key, obj) {
+	localStorage[key] = JSON.stringify(obj);
+}
+	 
+
 $(document).ready(function() {
 	var timer;
 	
-	// конфиг: монеты, выбранное оружие по id (0 - дефолтная морковка)
+	var guns = {
+		0 : {
+			id : 0,
+			name : "Морковка",
+			coins : 0,
+			img : "0-carrot.png"
+		},
+		1 : {
+			id : 1,
+			name : "Топор",
+			coins : 500,
+			img : "1-axe.png"
+		}
+	};
+	
 	function config() {
 		if(typeof localStorage["coins"] == 'undefined') {
 			 localStorage["coins"] = 0;
@@ -13,6 +36,14 @@ $(document).ready(function() {
 		
 		if(typeof localStorage["theme"] == 'undefined') {
 			 localStorage["theme"] = 0;
+		}
+		
+		if(typeof localStorage["shop"] == 'undefined') {
+			var data = {
+				guns: [0]
+			};
+			
+			save("shop", data);
 		}
 	}
 	
@@ -39,37 +70,55 @@ $(document).ready(function() {
 			localStorage["time"]--;
 		}, 1000);
 	}
-	
+		
 	function show_rabbits() {
 		var showtime = 1000;
-		var hidetime = 800;
+		var hidetime = 900;
+		var number;
+		var prev;
 		show = setInterval(function() {
-			var number = 1 + Math.floor(Math.random() * 9);
-			$('#lunka-'+number+' .rabbit').addClass("rabbit-show");
-			setTimeout(function() {
-				$('#lunka-'+number+' .rabbit').removeClass("rabbit-show");
-				
-				setTimeout(function(){
-					var randSkin = 1 + Math.floor(Math.random() * 4);
-					$('#lunka-'+number+' .rabbit').attr("class", "rabbit rabbit-"+randSkin);
-					$('#lunka-'+number+' .rabbit').data("money", randSkin*5);
-				}, 600)
-			}, hidetime);
+			number = 1 + Math.floor(Math.random() * 9);
+			if(number == prev) {
+				number = 1 + Math.floor(Math.random() * 9);
+				prev = number;
+				return number;
+			} else{
+				el = $('#lunka-'+number+' .rabbit');
+				el.data("ready", 1);
+				el.addClass("rabbit-show");
+				setTimeout(function() {
+					el.removeClass("rabbit-show");
+					el.data("ready", 0);
+					
+					setTimeout(function() {
+						var randSkin = 1 + Math.floor(Math.random() * 4);
+						
+						var prefix = "rabbit-skin-";
+						var classes = el.attr("class").split(" ").filter(function(c) {
+						    return c.lastIndexOf(prefix, 0) !== 0;
+						});
+						el.attr("class", classes.join(" "));
+						
+						el.addClass("rabbit-skin-"+randSkin);
+						el.data("money", randSkin*5);
+					}, 800);
+
+				}, hidetime);
+			}
+	
 		}, showtime);
 	}
-	
 	
 	function stop() {
 		clearInterval(timer);
 		clearInterval(show);
 		alert("Конец");
 	}
-
 	
 	$(".lunka").click(function(){
 		var self = $(this).find(".rabbit");
 	
-		if(self.hasClass("rabbit-show")) {
+		if(self.data("ready") == 1) {
 			localStorage["coins"] = parseInt(localStorage["coins"]) + parseInt(self.data("money"));
 			localStorage["time"] = parseInt(localStorage["time"]) + 2;
 			self.addClass("rabbit-dead");
@@ -81,6 +130,7 @@ $(document).ready(function() {
 			}, 600);
 			
 			$(".coins").text(localStorage["coins"]);
+			el.data("ready", 0);
 		}
 		return false;
 	});
@@ -90,30 +140,30 @@ $(document).ready(function() {
 	});
 	
 	function shop() {
-		var guns = {
-			0 : {
-				"id" : 0,
-				"name" : "Морковка",
-				"coins" : 0,
-				"img" : "0-carrot.png"
-			},
-			1 : {
-				"id" : 1,
-				"name" : "Топор",
-				"coins" : 500,
-				"img" : "1-axe.png"
-			}
-		};
-		
-		
+		var data = load("shop");
+			
 		$.each(guns, function(i, val) {
 			var id = val["id"];
 			var coins = val["coins"];
 			var name = val["name"];
 			var img = val["img"];
-			var status = 0;
 			
-	    	$(".shopjs .row").append('<div class="col-xs-4"><div class="buy-gun" data-id="'+id+'" data-coins="'+coins+'" data-status="'+status+'" style="cursor: url(img/guns/'+img+'), auto;"><div class="img"><img src="img/guns/'+img+'" alt=""></div><p class="gun-info"><strong>'+name+'</strong><br><i class="fa fa-money">'+coins+'</i></p></div></div>');
+			var status = 0;
+			if (data.guns.indexOf(id) >= 0) {
+				status = 1;
+			}
+			
+			var icon = '<i class="fa fa-money"></i>';
+			if(status == 1) {
+				var checked = "fa-check-circle-o";
+				if(parseInt(localStorage["gun"]) == parseInt(id)) {
+					checked = "fa-check-circle";
+				}
+				icon = '<i class="fa '+checked+'"></i>';
+				coins = "";
+			}
+			
+	    	$(".shopjs .row").append('<div class="col-xs-4"><div class="buy-gun" data-id="'+id+'" data-coins="'+coins+'" data-status="'+status+'" style="cursor: url(img/guns/'+img+'), auto;"><div class="img"><img src="img/guns/'+img+'" alt=""></div><p class="gun-info"><strong class="gun-title">'+name+'</strong><br>'+icon+' '+coins+'</p></div></div>');
 	    });
 	}
 	
@@ -134,7 +184,6 @@ $(document).ready(function() {
 	if($("body").hasClass("game")) {
 		init();	
 	}
-<<<<<<< HEAD
 	
 	if($("body").hasClass("index")) {
 		config();
@@ -186,7 +235,3 @@ $(document).on("click", ".buy-gun", function() {
 		*/
 	}
 });
-=======
-});
-
->>>>>>> FETCH_HEAD
